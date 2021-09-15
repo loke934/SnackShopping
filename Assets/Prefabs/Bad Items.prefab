@@ -96,10 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12eae633c9b0a848b4d007870535635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreBadStuff: -150
-  scoreCollideWithWall: -20
-  scoreItem: 100
-  playSound:
+  scoreBadStuff: -75
+  scoreItem: 50
+  onPlaySound:
     m_PersistentCalls:
       m_Calls: []
 --- !u!61 &-39555759831965113

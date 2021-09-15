@@ -8,6 +8,8 @@ public class PlayerInput : MonoBehaviour
 {
     [Header("PLAYER MOVEMENT")]
     [SerializeField, Range(0.05f, 2f)] private float speed;
+
+    [SerializeField] private Rigidbody2D rb;
     
     private float _timer;
     private float _timeToEndGame;
@@ -49,6 +51,11 @@ public class PlayerInput : MonoBehaviour
     private IEnumerator AutoMovement() {
         while (_timer < _timeToEndGame) {
             yield return new WaitForSeconds(speed);
+            if (_timer < 0f)
+            {
+                break;
+            }
+          
             if (InBounds(_newPosition)) {
                 if (_scenerySpawner.GridArray[_newPosition.x,_newPosition.y] != null) {
                     transform.position = new Vector2(_newPosition.x, _newPosition.y);
@@ -66,6 +73,7 @@ public class PlayerInput : MonoBehaviour
         }
         return false;
     }
+
     private void Start() {
         onChangeSprite = new UnityEvent<PlayerAnimation.MoveState>();
         onChangeSprite.AddListener(GetComponent<PlayerAnimation>().ChangeSprite);
