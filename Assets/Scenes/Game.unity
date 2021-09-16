@@ -284,8 +284,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282485778
-  m_fontColor: {r: 0.069686726, g: 0.5471698, b: 0.25565383, a: 1}
+    rgba: 4278196991
+  m_fontColor: {r: 1, g: 0.10283645, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -302,13 +302,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 32
+  m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -369,7 +369,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.0013199, y: 0.000103}
-  m_SizeDelta: {x: 136.97, y: 37.44}
+  m_SizeDelta: {x: 140, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1150676278
 GameObject:
@@ -406,8 +406,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 318.4837, y: 181.28009}
-  m_SizeDelta: {x: 136.9674, y: 37.4398}
+  m_AnchoredPosition: {x: 405, y: 216}
+  m_SizeDelta: {x: 140, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150676280
 MonoBehaviour:
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -645,8 +645,9 @@ MonoBehaviour:
   gridXSize: 25
   gridDensity: 0.178
   obstaclesDensity: 0.286
-  spawnObstaclesUnder: 0.752
-  spawnItemsUnder: 0.716
+  spawnWalkableTilesUnder: 0.752
+  spawnItemsUnder: 0.3
+  spawnStoreItemsUnder: 0.7
   walkableTilePrefab: {fileID: 8894580031579265503, guid: 666c2f04a91daff4bac3f763697d2703, type: 3}
   obstacleTilePrefab: {fileID: 3155352921459884283, guid: af4e09f84981ec54eb805d41001d4b0a, type: 3}
   storeItemsPrefab: {fileID: 1106747170278962937, guid: 7a1b307126dad0140b204cdbdb654f71, type: 3}
@@ -668,6 +669,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 36c5c2d32d6e5834ebf3d84ae5c8b01e, type: 3}
   - {fileID: 21300000, guid: 489912c6941fa9b48bf20fb07eb6d7a5, type: 3}
   - {fileID: 21300000, guid: ceb7d4ba1e853c741a565484d3f1af4b, type: 3}
+  - {fileID: 21300000, guid: 3e5397942317ff54bba8ac82572581ce, type: 3}
+  - {fileID: 21300000, guid: 2bf92f461ed19f24fb052c9061c08bd9, type: 3}
+  - {fileID: 21300000, guid: c2b79727230842b4d89c658c13fd4e24, type: 3}
 --- !u!4 &1782524949
 Transform:
   m_ObjectHideFlags: 0

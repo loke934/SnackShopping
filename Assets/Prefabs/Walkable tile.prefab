@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7745989103429245471}
   - component: {fileID: -4225602562898070608}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Walkable tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

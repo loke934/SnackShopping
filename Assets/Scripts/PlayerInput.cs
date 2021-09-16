@@ -49,11 +49,11 @@ public class PlayerInput : MonoBehaviour
     private IEnumerator AutoMovement() {
         while (_timer < _timeToEndGame) {
             yield return new WaitForSeconds(speed);
+            
             if (_timer < 0f)
             {
                 break;
             }
-          
             if (InBounds(_newPosition)) {
                 if (_scenerySpawner.GridArray[_newPosition.x,_newPosition.y] != null) {
                     transform.position = new Vector2(_newPosition.x, _newPosition.y);
@@ -65,6 +65,7 @@ public class PlayerInput : MonoBehaviour
         }
     }
     private bool InBounds(Vector2Int newPosition) {
+        
         if (newPosition.x >= 0 && newPosition.x < _scenerySpawner.GridArray.GetLength(0) && 
             newPosition.y >= 0 && newPosition.y < _scenerySpawner.GridArray.GetLength(1)) {
             return true;
@@ -79,7 +80,7 @@ public class PlayerInput : MonoBehaviour
         transform.position = new Vector2((int)transform.position.x, (int)transform.position.y);
         StartCoroutine(AutoMovement());
     }
-    private void FixedUpdate() {
+    private void Update() {
         _timer = _timeManager.Timer;
         SetNewPosition();
     }

@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    [Header("TIMER")]
     [SerializeField, Range(10f, 25f)] private float gameTime = 15f;
+    
     [SerializeField] private UI canvasUI;
     private float _timer;
 
@@ -19,8 +21,7 @@ public class TimeManager : MonoBehaviour
         get { return gameTime; }
     }
 
-    private void Awake()
-    {
+    private void Awake() {
         _timer = gameTime;
     }
 

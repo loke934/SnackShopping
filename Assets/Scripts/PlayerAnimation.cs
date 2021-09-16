@@ -21,6 +21,7 @@ public class PlayerAnimation : MonoBehaviour
    
    public void ChangeSprite(MoveState direction) {
       gameObject.GetComponent<SpriteRenderer>().sprite = SelectSprite(direction);
+      
       if (direction == MoveState.Left) {
          gameObject.GetComponent<SpriteRenderer>().flipX = false;
       }

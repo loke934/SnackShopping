@@ -6,15 +6,18 @@ using Random = UnityEngine.Random;
 
 public class ScenerySpawner : MonoBehaviour
 {
-    [Header("STORE SCENERY")]
+    [Header("GRID")]
     [SerializeField, Range(10,30)]private int gridYSize = 22;
     [SerializeField, Range(10,30)]private int gridXSize = 20;
     [SerializeField,Range(0f,1f)] float gridDensity = 0.178f;
     [SerializeField, Range(0.1f,0.9f)]float obstaclesDensity = 0.286f;
-    [SerializeField, Range(0f, 1f)] private float spawnObstaclesUnder = 0.752f;
+    [SerializeField, Range(0f, 1f)] private float spawnWalkableTilesUnder = 0.752f;
+    [SerializeField] private GameObject gridHolder;
+    [SerializeField] private GameObject itemsHolder;
 
     [Header("STORE ITEMS")] 
-    [SerializeField, Range(0f, 1f)] private float spawnItemsUnder = 0.716f;
+    [SerializeField, Range(0f, 1f)] private float spawnItemsUnder = 0.3f;
+    [SerializeField, Range(0.1f, 0.9f)] private float spawnStoreItemsUnder = 0.7f;
     
     [Header("PREFABS")]
     [SerializeField] private GameObject walkableTilePrefab;
@@ -50,38 +53,44 @@ public class ScenerySpawner : MonoBehaviour
             }
         }
     }
-    
-    private void SpawnStoreIrregularSize() {
+    /// <summary>
+    /// Spawns the grid with a irregular shape using perlin noise.
+    /// </summary>
+    private void SpawnStoreIrregularShape()
+    {
         for (int y = 0; y < gridYSize; y++) {
             for (int x = 0; x < gridXSize; x++) {
-                float num = Mathf.PerlinNoise(x * gridDensity, y * gridDensity);
-                if (num > 0.3 && num < 0.65) {
+                float perlinValue = Mathf.PerlinNoise(x * gridDensity, y * gridDensity);
+                
+                if (perlinValue > 0.3 && perlinValue < 0.65) {
                     Vector3 spawnPosition = new Vector3(x ,y);
                     GameObject tileToSpawn = TileToSpawn(x,y);
-                    ItemBehaviour shelf = Instantiate(tileToSpawn, spawnPosition, Quaternion.identity)?
-                        .GetComponent<ItemBehaviour>();
-                    //Setup in Colliders script
-                    if(!ReferenceEquals(shelf, null)) {
-                        shelf.onPlaySound.AddListener(_musicManagerInScene.PlaySound);
-                    }
+                    Instantiate(tileToSpawn, spawnPosition, Quaternion.identity).transform.SetParent(gridHolder.transform);
                 }
             }
         }
     }
     
+    /// <summary>
+    /// Spawns items only on walkable tiles on the grid.
+    /// </summary>
     private void SpawnItems() {
         for (int y = 0; y < gridYSize; y++) {
             for (int x = 0; x < gridXSize; x++) {
                 Vector3 position = new Vector3(x,y);
+                
                 if (_obstaclePositionsList.Contains(position)) {
                     continue;
                 }
+                
                 if (_walkablePositionsList.Contains(position)) {
                     GameObject objectToSpawn = ItemToSpawn();
-                    if (Random.Range(0f,1f) > spawnItemsUnder) {
-                        ItemBehaviour item = Instantiate(objectToSpawn, position, Quaternion.identity)?
-                            .GetComponent<ItemBehaviour>();
-                        //Setup in colliders script
+                    
+                    if (Random.Range(0f,1f) < spawnItemsUnder) {
+                        ItemBehaviour item = Instantiate(objectToSpawn, position, Quaternion.identity)?.GetComponent<ItemBehaviour>();
+                        item.transform.SetParent(itemsHolder.transform);
+                        
+                        //Setup in Item behaviour script
                         if (!ReferenceEquals(item,null)) {
                             item.onPlaySound.AddListener(_musicManagerInScene.PlaySound);
                         }
@@ -91,10 +100,17 @@ public class ScenerySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chooses which tile to spawn at coordinate and saves to corresponding list.
+    /// </summary>
+    /// <param name="x">Position x-axis</param>
+    /// <param name="y">Position y-axi</param>
+    /// <returns>Type of tile to spawn</returns>
     private GameObject TileToSpawn(int x, int y) {
         GameObject tileToSpawn;
         float perlinValue = Mathf.PerlinNoise(x * obstaclesDensity, y * obstaclesDensity);
-        if (perlinValue < spawnObstaclesUnder) {
+        
+        if (perlinValue < spawnWalkableTilesUnder) {
             tileToSpawn = walkableTilePrefab;
             GridArray[x, y] = tileToSpawn;
             Vector2 positionToSave = new Vector2 (x,y);
@@ -107,11 +123,15 @@ public class ScenerySpawner : MonoBehaviour
         }
         return tileToSpawn;
     }
-    
+    /// <summary>
+    /// Chooses which item to spawn and sets sprite.
+    /// </summary>
+    /// <returns>Type of item to spawn</returns>
     private GameObject ItemToSpawn() {
         GameObject objectToSpawn;
         float value = Random.Range(0f, 1f);
-        if (value < 0.7f) {
+        
+        if (value < spawnStoreItemsUnder) {
             int randomIndex = Random.Range(0, itemsSprites.Count);
             storeItemsPrefab.GetComponent<SpriteRenderer>().sprite = itemsSprites[randomIndex];
             objectToSpawn = storeItemsPrefab;
@@ -122,6 +142,7 @@ public class ScenerySpawner : MonoBehaviour
         return objectToSpawn;
     }
 
+    #region Scrip Set Ups
     private void CameraSetUp() {
         Camera cameraInScene = Instantiate(cameraPrefab, transform);
         cameraInScene.GetComponent<CameraMovement>().Target = _playerInScene.GetComponent<Transform>();
@@ -149,6 +170,9 @@ public class ScenerySpawner : MonoBehaviour
         Music musicManager = Instantiate(musicManagerPrefab, transform);
         _musicManagerInScene = musicManager;
     }
+    #endregion
+    
+    
     private void Awake() {
         GridArray = new GameObject[gridXSize, gridYSize];
         _obstaclePositionsList = new List<Vector2>();
@@ -157,7 +181,7 @@ public class ScenerySpawner : MonoBehaviour
         TimeManagerSetUp();
         PlayerSetUp();
         CameraSetUp();
-        SpawnStoreIrregularSize();
+        SpawnStoreIrregularShape();
         SpawnItems();
         CanvasSetUp();
     }

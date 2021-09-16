@@ -15,29 +15,25 @@ public class CameraMovement : MonoBehaviour
         set { player = value; }
     }
 
-    private void Movement()
-    {
+    private void Movement() {
         Vector3 positionToFollow = player.transform.position;
         positionToFollow.z = transform.position.z;
-        
         Vector3 movingDirection = (positionToFollow - transform.position).normalized;
         float distance = Vector3.Distance(positionToFollow, transform.position);
-        if (distance > _radius)
-        {
+        
+        if (distance > _radius) {
             Vector3 newCameraPosition = transform.position + movingDirection * distance * cameraMoveSpeed * Time.deltaTime;
             
             float distanceAfterMoving = Vector3.Distance(newCameraPosition, positionToFollow);
-            //overshooting player
-            if (distanceAfterMoving > distance)
-            {
+            //if low frame rate and deltatime is large it will overshoot
+            if (distanceAfterMoving > distance){
                 newCameraPosition = positionToFollow;
             }
             transform.position = newCameraPosition;
         }
     }
     
-    void LateUpdate()
-    {
+    void LateUpdate() {
        Movement();
     }
 

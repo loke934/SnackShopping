@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Music : MonoBehaviour
 {
-   [Header("SOUNDS")]
+   [Header("MUSIC AND SOUNDS")]
    [SerializeField] private AudioSource music;
    [SerializeField] private AudioSource goodItems;
    [SerializeField] private AudioSource badItems;

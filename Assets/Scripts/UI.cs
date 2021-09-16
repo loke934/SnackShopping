@@ -11,14 +11,12 @@ public class UI : MonoBehaviour
    [SerializeField] private TextMeshProUGUI timerTextBox;
    private Score _score;
    private float _timer;
-   private float _gameTime;
 
    public Score Score {
       set { _score = value; }
    }
 
-   public float Timer
-   {
+   public float Timer {
       set { _timer = value; }
    }
    
@@ -27,12 +25,11 @@ public class UI : MonoBehaviour
       scoreTextBox.text = "Your score is " + _score.TotalScore;
    }
 
-   private void Update()
-   {
+   private void Update() {
       _timer -= Time.deltaTime;
       float time = (int)_timer;
-      if (_timer > 0f)
-      {
+      
+      if (_timer > 0f) {
          timerTextBox.text = "Timer: " + time;
       }
       
