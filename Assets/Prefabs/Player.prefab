@@ -136,8 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ac122615199834b9040c8479d617b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.15
-  rb: {fileID: 5396355098209690691}
+  speed: 0.1
   onChangeSprite:
     m_PersistentCalls:
       m_Calls: []

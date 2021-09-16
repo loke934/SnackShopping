@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class ItemBehaviour : MonoBehaviour
 {
     [Header("SCORES")]
-    [SerializeField,Range(-10,-200)] private int scoreBadStuff = -150;
-    [SerializeField,Range(10,200)] private int scoreItem = 100;
+    [SerializeField,Range(-100,-200)] private int scoreBadStuff = -75;
+    [SerializeField,Range(10,200)] private int scoreStoreItem = 50;
     
     private int _typeOfScore;
     
@@ -20,9 +20,10 @@ public class ItemBehaviour : MonoBehaviour
             onPlaySound.Invoke(Music.Sound.Bad);
         }
         else if (other.CompareTag("Player") && gameObject.CompareTag("Shop Item")) {
-            _typeOfScore = scoreItem;
+            _typeOfScore = scoreStoreItem;
             onPlaySound.Invoke(Music.Sound.Good);
         }
+       
         other.gameObject.GetComponent<Score>().TotalScore = _typeOfScore;
         Destroy(gameObject);
     }

@@ -7,10 +7,8 @@ using UnityEngine.Events;
 public class PlayerInput : MonoBehaviour
 {
     [Header("PLAYER MOVEMENT")]
-    [SerializeField, Range(0.05f, 2f)] private float speed;
+    [SerializeField, Range(0.05f, 1f)] private float speed = 0.1f; //used as time in coroutine
 
-    [SerializeField] private Rigidbody2D rb;
-    
     private float _timer;
     private float _timeToEndGame;
     private ScenerySpawner _scenerySpawner;

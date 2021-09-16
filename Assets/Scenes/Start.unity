@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Party starts in 15 seconds!\nBetter gather all the snack you can before
+  m_text: "The party is about to start!\nBetter gather all the snack you can before
     the time runs out.\n but be carful to avoid the worms. \nUse w,a,s,d to move.\nAnd
     remember, nobody wants to snack on worms!"
   m_isRightToLeft: 0

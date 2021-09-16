@@ -641,8 +641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e775c1d2d304248a8b13f6ffa71313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridYSize: 22
-  gridXSize: 20
+  gridYSize: 26
+  gridXSize: 25
   gridDensity: 0.178
   obstaclesDensity: 0.286
   spawnObstaclesUnder: 0.752
