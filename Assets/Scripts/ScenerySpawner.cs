@@ -172,7 +172,6 @@ public class ScenerySpawner : MonoBehaviour
     }
     #endregion
     
-    
     private void Awake() {
         GridArray = new GameObject[gridXSize, gridYSize];
         _obstaclePositionsList = new List<Vector2>();
